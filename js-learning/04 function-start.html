@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Function start</title>
+    <style>
+      .msgBox {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        background: #eee;
+      }
+
+      .msgBox p {
+        line-height: 1.5;
+        padding: 10px 20px;
+        color: #333;
+      }
+
+      .msgBox button {
+        background: none;
+        border: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 1.1rem;
+        color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <button>Display message box</button>
+
+    <script>
+      var btn = document.querySelector('button')
+      btn.onclick = function () {
+        displayMessage('Woo, this is a different message!')
+      }
+
+      function displayMessage(msgText, msgType) {
+        // 取html
+        var html = document.querySelector('html')
+
+        // 创建一个div元素，属性为class=msgBox，添加到html尾部
+        var panel = document.createElement('div')
+        panel.setAttribute('class', 'msgBox')
+        html.appendChild(panel)
+
+        // 创建一个p元素，为其添加文本内容，添加到div尾部
+        var msg = document.createElement('p')
+        msg.textContent = msgText
+        panel.appendChild(msg)
+
+        // 创建一个button元素，为其添加文本内容，添加到div尾部
+        var closeBtn = document.createElement('button')
+        closeBtn.textContent = 'x'
+        panel.appendChild(closeBtn)
+
+        closeBtn.onclick = function() {
+          panel.parentNode.removeChild(panel)
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div class="app-7">
+      <ol>
+        <!-- 现在为每个 todo-item 提供 todo 对象
+        todo 对象是变量，即其内容可以是动态的。
+        而且需要为每个组件提供一个key -->
+        <todo-item
+          v-for="item in groceryList"
+          v-bind:todo="item"
+          v-bind:key="item.id"
+        ></todo-item>
+      </ol>
+      <script src="index.js"></script>
+    </div>
+  </body>
+</html>

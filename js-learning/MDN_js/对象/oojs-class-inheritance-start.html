@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Object-oriented JavaScript inheritance</title>
+  </head>
+
+  <body>
+    <div>
+      <label for="jscode">Enter code:</label>
+      <input type="text" id="jscode" />
+      <button>Submit code</button>
+    </div>
+
+    <p></p>
+  </body>
+
+  <script>
+    var input = document.querySelector('input')
+    var btn = document.querySelector('button')
+    var para = document.querySelector('p')
+    btn.onclick = function() {
+      var code = input.value
+      para.textContent = eval(code)
+    }
+    // 在构造器（函数体）中定义属性
+    function Person(first, last, age, gender, interests) {
+      this.name = {
+        first,
+        last
+      }
+      this.age = age
+      this.gender = gender
+      this.interests = interests
+    }
+    // 在 prototype 属性上定义方法
+    Person.prototype.bio = function() {
+      // First define a string, and make it equal to the part of
+      // the bio that we know will always be the same.
+      var string =
+        this.name.first +
+        ' ' +
+        this.name.last +
+        ' is ' +
+        this.age +
+        ' years old. '
+      // define a variable that will contain the pronoun part of
+      // the second sentence
+      var pronoun
+      // check what the value of gender is, and set pronoun
+      // to an appropriate value in each case
+      if (
+        this.gender === 'male' ||
+        this.gender === 'Male' ||
+        this.gender === 'm' ||
+        this.gender === 'M'
+      ) {
+        pronoun = 'He likes '
+      } else if (
+        this.gender === 'female' ||
+        this.gender === 'Female' ||
+        this.gender === 'f' ||
+        this.gender === 'F'
+      ) {
+        pronoun = 'She likes '
+      } else {
+        pronoun = 'They like '
+      }
+      // add the pronoun string on to the end of the main string
+      string += pronoun
+      // use another conditional to structure the last part of the
+      // second sentence depending on whether the number of interests
+      // is 1, 2, or 3
+      if (this.interests.length === 1) {
+        string += this.interests[0] + '.'
+      } else if (this.interests.length === 2) {
+        string += this.interests[0] + ' and ' + this.interests[1] + '.'
+      } else {
+        // if there are more than 2 interests, we loop through them
+        // all, adding each one to the main string followed by a comma,
+        // except for the last one, which needs an and & a full stop
+        for (var i = 0; i < this.interests.length; i++) {
+          if (i === this.interests.length - 1) {
+            string += 'and ' + this.interests[i] + '.'
+          } else {
+            string += this.interests[i] + ', '
+          }
+        }
+      }
+      // finally, with the string built, we alert() it
+      alert(string)
+    }
+    Person.prototype.greeting = function() {
+      alert("Hi! I'm " + this.name.first + '.')
+    }
+    Person.prototype.farewell = function() {
+      alert(this.name.first + ' has left the building. Bye for now!')
+    }
+    var person1 = new Person('Tammi', 'Smith', 17, 'female', [
+      'music',
+      'skiing',
+      'kickboxing'
+    ])
+
+    // 继承步骤：
+    // 1.定义Teacher 构造器函数
+    // 2.设置Teacher 的原型和构造器指向
+    // 3.在Teacher的原型上定义方法（可选）
+    // 注：2、3步骤不可颠倒
+
+    // Teacher 继承自 Person
+    // 新的构造器 Teacher
+    function Teacher(first, last, age, gender, interests, subject) {
+      Person.call(this, first, last, age, gender, interests)
+      this.subject = subject // Teacher实例独有属性
+    }
+    // Teacher.prototype.hello = function() {alert('hello')} //是无效的
+    // 因为下面设置Teacher 的原型又会被覆盖掉
+    // Teacher.prototype 继承 Person.prototype 的所有属性和方法
+    Teacher.prototype = Object.create(Person.prototype)
+
+    // Teacher.prototype.__proto__ === Person.prototype;  //true
+
+    // Person.prototype.constructor; //Person
+    // Teacher.prototype.constructor; //Person
+
+    // 现在Teacher.prototype 的constructor 属性指向的是Person 构造函数
+    // 不是说它意味着通过Teacher 构造的实例man2，是以Person 构造函数进行构造的，
+    // 而是说这个constructor 是一种提示，一般情况下指向对象(如实例man1)的构造函数(Person)
+    // 由于constructor属性是可以变更的，所以未必是真的指向其构造函数。
+    // 如man2, 实际上的构造函数是Teacher，但是man2.constructor 却不是Teacher，显然不合逻辑，
+    // 而且通过man2找构造函数也找不到了
+    // 如果说man2 是以Person 构造的，那么下面的式子就应该为false，因为Person没有subject，但结果却是true
+    // man2.hasOwnProperty('subject'); //true
+    // man1 是以Person 构造的，Person没有subject，所以为false
+    // man1.hasOwnProperty('subject'); //false
+
+    // var man1 = new Person()
+    // man1; //Person {...}
+    // man1.constructor === Person; //true
+    // var man2 = new Teacher()
+    // man2; //Teacher {...}
+    // man2.constructor === Teacher; //false
+    // man2.constructor === Person; //true
+    // man2.hasOwnProperty('subject'); //true
+
+    // 以上所说，constructor最重要的修正意义应该是针对显示调用的时候
+    // 它主要防止一种情况下出错，就是你显式地去使用构造函数。
+    // 假设我们想要构造一个新的实例man3(与实例man2同类型的)，但不知道对应的构造函数的名称是什么
+    // 或者不知道man2是由哪个函数实例化出来的，想clone一个。
+    // var man3 = new man2.constructor();
+    // man3; //Person {...}
+    // man3.constructor; //Person
+    // 结果发现man3 不是实际上的man2 的构造函数(Teacher)构造出来的，而是实际上的man2.constructor 指的那个即Person
+    // man3.hasOwnProperty('subject'); //false
+    // man3.hasOwnProperty('hello'); //false
+    // man3 instanceof Teacher; //false
+    // man3 instanceof Person; // true
+
+    // 为了避免以上情况出现，以及维持这个习惯，就需要对constructor 进行修正
+    // 修正Teacher.prototype 的constructor, 指向Teacher
+    Teacher.prototype.constructor = Teacher
+    Teacher.prototype.greeting = function() {
+      var prefix
+
+      if (
+        this.gender === 'male' ||
+        this.gender === 'Male' ||
+        this.gender === 'm' ||
+        this.gender === 'M'
+      ) {
+        prefix = 'Mr.'
+      } else if (
+        this.gender === 'female' ||
+        this.gender === 'Female' ||
+        this.gender === 'f' ||
+        this.gender === 'F'
+      ) {
+        prefix = 'Mrs.'
+      } else {
+        prefix = 'Mx.'
+      }
+
+      alert(
+        'Hello. My name is ' +
+          prefix +
+          ' ' +
+          this.name.last +
+          ', and I teach ' +
+          this.subject +
+          '.'
+      )
+    }
+
+    var teacher1 = new Teacher('Dave', 'Griffiths', 31, 'male', ['football', 'cookery'], 'mathematics')
+  </script>
+</html>
