@@ -29,3 +29,78 @@ function Ball(x, y, velX, velY, color, size) {
   this.color = color
   this.size = size
 }
+
+// Ball.prototype.draw = () => {
+// 箭头函数不能用于定义原型方法！！！！！因为里面的this继承的是外层作用域的this也就是window/Object了
+
+Ball.prototype.draw = function() {
+  // beginPath() 新建一条路径，生成之后，图形绘制命令被指向到路径上生成路径。
+  ctx.beginPath()
+  // fillStyle 设置图形的填充颜色
+  // strokeStyle 设置图形轮廓的颜色
+  ctx.fillStyle = this.color
+  // arc() 绘制圆弧或者圆，arc(x, y, radius, startAngle, endAngle, anticlockwise)
+  // 画一个以（x,y）为圆心的，以radius为半径的圆弧（圆）；
+  // 从startAngle开始到endAngle结束，也就是圆弧对应的夹角，单位以弧度表示。这里用的是 0 和 2 * PI，也就是 360 度（如果你设置成 0 和 1 * PI，则只会出现一个半圆，也就是 180 度）；
+  // 按照anticlockwise给定的方向（默认为顺时针）来生成。false-顺时针，true-逆时针
+  ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI)
+  // fill() 通过填充路径的内容区域生成实心的图形。
+  ctx.fill()
+}
+
+Ball.prototype.update = function() {
+  // 4个if，检查小球是否碰到画布的边缘。如果碰到，我们反转小球的速度方向来让它向反方向移动。
+  // 检查小球的 x 坐标是否大于画布的宽度（小球会从右边缘离开）。
+  if (this.x + this.size >= WIDTH) {
+    this.velX = -this.velX
+  }
+  // 检查小球的 x 坐标是否小于0（小球会从左边缘离开）。
+  if (this.x - this.size <= 0) {
+    this.velX = -this.velX
+  }
+
+  // 检查小球的 y 坐标是否大于画布的高度（小球会从下边缘离开）。
+  if (this.y + this.size >= HEIGHT) {
+    this.velY = -this.velY
+  }
+  // 检查小球的 y 坐标是否小于0（小球会从上边缘离开）。
+  if (this.y - this.size <= 0) {
+    this.velY = -this.velY
+  }
+
+  // 在每种情况下都会加上小球的半径，因为 x/y 坐标是小球中心的坐标，这样小球在其边界接触浏览器窗口的边界时反弹，而不是小球的一部分都不见了再返回。
+
+  // 将 velX 的值加到 x 的坐标上，将 velY 的值加到 y 坐标上 —— 每次调用这个方法的时候小球就移动这么多。
+  this.x = this.x + this.velX
+  this.y = this.y + this.velY
+}
+
+// 储存一些小球
+var balls = []
+// 几乎所有的动画效果都会用到一个运动循环，也就是每一帧都自动更新视图。这是大多数游戏或者其他类似项目的基础。
+function loop() {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.25)'
+  // fillRect(x, y, width, height) 绘制一个填充的矩形
+  ctx.fillRect(0, 0, WIDTH, HEIGHT)
+
+  // 创建25个球
+  while (balls.length < 25) {
+    var ball = new Ball(
+      random(0, WIDTH),
+      random(0, HEIGHT),
+      random(-7, 7),
+      random(-7, 7),
+      randomColor(),
+      random(10, 20)
+    )
+    balls.push(ball)
+  }
+
+  for (let i = 0; i < balls.length; i++) {
+    balls[i].draw()
+    balls[i].update()
+  }
+
+  requestAnimationFrame(loop)
+}
+loop()

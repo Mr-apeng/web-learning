@@ -118,6 +118,8 @@
     // 因为下面设置Teacher 的原型又会被覆盖掉
     // Teacher.prototype 继承 Person.prototype 的所有属性和方法
     Teacher.prototype = Object.create(Person.prototype)
+    // 也可以用下式
+    // Teacher.prototype = new Person()
 
     // Teacher.prototype.__proto__ === Person.prototype;  //true
 
