@@ -75,8 +75,25 @@ Ball.prototype.update = function() {
   this.y = this.y + this.velY
 }
 
+// 检测碰撞
+Ball.prototype.collisionDetect = function() {
+  for (let i = 0; i < balls.length; i++) {
+    if (this !== balls[i]) {
+      // 如果this 不是自己，计算两球之间的x, y
+      let dx = this.x - balls[i].x
+      let dy = this.y - balls[i].y
+      //距离公式，根号(△x平方 + △y平方)
+      let distance = Math.sqrt(dx * dx + dy * dy)
+
+      if (distance < this.size + balls[i].size) {
+        balls[i].color = this.color = randomColor()
+      }
+    }
+  }
+}
+
 // 储存一些小球
-var balls = []
+let balls = []
 // 几乎所有的动画效果都会用到一个运动循环，也就是每一帧都自动更新视图。这是大多数游戏或者其他类似项目的基础。
 function loop() {
   ctx.fillStyle = 'rgba(0, 0, 0, 0.25)'
@@ -85,7 +102,7 @@ function loop() {
 
   // 创建25个球
   while (balls.length < 25) {
-    var ball = new Ball(
+    let ball = new Ball(
       random(0, WIDTH),
       random(0, HEIGHT),
       random(-7, 7),
@@ -99,8 +116,11 @@ function loop() {
   for (let i = 0; i < balls.length; i++) {
     balls[i].draw()
     balls[i].update()
+    balls[i].collisionDetect()
   }
 
-  requestAnimationFrame(loop)
+  window.requestAnimationFrame(loop)
+  // window.requestAnimationFrame() 方法跟setTimeout 类似，都是推迟某个函数的执行。不同之处在于，setTimeout 必须指定推迟的时间，window.requestAnimationFrame() 则是推迟到浏览器下一次重流时执行，执行完才会进行下一次重绘。重绘通常是 16ms 执行一次，不过浏览器会自动调节这个速率，比如网页切换到后台Tab 页时，requestAnimationFrame() 会暂停执行。
+  // 如果某个函数会改变网页的布局，一般就放在window.requestAnimationFrame()里面执行，这样可以节省系统资源，使得网页效果更加平滑。因为慢速设备会用较慢的速率重流和重绘，而速度更快的设备会有更快的速率。
 }
 loop()
