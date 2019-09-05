@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    /* 在div元素的内部的内容的前面,后面创建一个元素,该元素为行内元素,且必须结合content使用 */
+    /* 其实这个 before 是个盒子 */
+    div::before { /*必须带一个属性 content*/
+      content: "";
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+      display: inline-block;
+    }
+    div::after {
+      content: "的目标"
+    }
+  </style>
+</head>
+<body>
+  <div>今年</div>
+</body>
+</html>
