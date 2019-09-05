@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="没怀孕" class="btn" />
+    <input type="button" value="没怀孕" class="btn" />
+    <input type="button" value="没怀孕" class="btn" />
+    <input type="button" value="没怀孕" class="btn" />
+    <input type="button" value="没怀孕" class="btn" />
+
+    <script>
+      let btns = document.querySelectorAll('.btn')
+      // 错误，嵌套函数的this指向window
+      // for (let i = 0; i < btns.length; i++) {
+      //   btns[i].addEventListener('click', function(e) {
+      //     // event.target.value = '怀孕了'
+      //     btns.forEach(function(item, index, array) {
+      //       // 判断 item 是不是用户点击的那个
+      //       console.log(`i: ${i}`)
+      //       console.log(`this: ${this}`)  //嵌套函数的this指向window
+      //       // return item === e.target
+      //       return item === this
+      //         ? (item.value = '怀孕了')
+      //         : (item.value = '没怀孕')
+      //     })
+      //   })
+      // }
+      // 更改，用箭头函数去继承外层作用域的this
+      for (let i = 0; i < btns.length; i++) {
+        console.log(`this: ${this}`)  //this指向window
+        btns[i].addEventListener('click', function() {
+          console.log(`this: ${this}`)
+          // this指向btns[i]
+          btns.forEach((item, index, array) => {
+            // 判断 item 是不是用户点击的那个
+            console.log(`i: ${i}`)
+            console.log(`this: ${this}`)  //this 继承外层作用域的this，即btns[i]
+            return item === this
+              ? (item.value = '怀孕了')
+              : (item.value = '没怀孕')
+          })
+        })
+      }
+    </script>
+  </body>
+</html>

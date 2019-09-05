@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="设置p的内容" class="btn" />
+    <p>
+      <span>你就冻死案件发来撒警方立刻撒酒疯啦书法家撒来看 </span>
+    </p>
+    <script>
+      let btn = document.querySelector('.btn')
+      btn.addEventListener('click', function() {
+        let para = document.querySelector('p')
+        para.textContent = '喝点开水把'
+      })
+
+      // btn.addEventListener('click', function() {
+      //   let para = document.querySelector('p')
+      //   para.innerHTML = '多喝烫水'
+      // })
+
+      // btn.addEventListener('click', function() {
+      //   let para = document.querySelector('p')
+      //   para.innerHTML = '<span>多喝烫水</span>'
+      // })
+    </script>
+  </body>
+</html>

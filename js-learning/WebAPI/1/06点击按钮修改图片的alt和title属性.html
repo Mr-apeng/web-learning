@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="点我显示效果" class="btn" />
+    <img src="../images/taobao.jpg" alt="你好" title="喝热水">
+
+    <script>
+      // let btn = document.getElementsByClassName('btn')[0]
+      let btn = document.querySelector('.btn')
+      btn.addEventListener('click', function() {
+        let image = document.querySelectorAll('img')[0]
+        iamge.alt = '雷猴'
+        image.title = '喝冷水'
+      })
+    </script>
+  </body>
+</html>

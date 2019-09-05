@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      img {
+        width: 400px;
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="../images/mm.png" class="aaa">
+      <img src="../images/1.jpg" alt="" class="tu" />
+    </a>
+
+    <script>
+      let a = document.querySelector('.aaa')
+      let image = document.querySelector('.tu')
+      // 这种写法，无法click到img，只是click到了a
+      // image.addEventListener('click', function() {
+      //   console.log(`this: ${this}`)
+      //   this.src = a.href
+      //   return false
+      // })
+      image.onclick = function() {
+        console.log(`this: ${this}`)
+        this.src = a.href
+        return false
+      }
+    </script>
+  </body>
+</html>

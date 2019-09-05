@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="http://www.baidu.com">百度</a>
+    <input type="button" id="btn" value="点我">
+    <script>
+      let aa = document.querySelector('a')
+      let btn = document.querySelector('#btn')
+      btn.addEventListener('click', function() {
+        // aa.textContent = '优酷'
+        aa.innerText = '优酷'
+        aa.href = 'http://www.youku.com'
+      })
+    </script>
+  </body>
+</html>

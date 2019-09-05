@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .box {
+        width: 600px;
+        border: 1px solid #ccc;
+        margin: 0 auto;
+      }
+      .box dl {
+        overflow: hidden;
+        margin: 10px 0;
+      }
+      .box dl dt,
+      .box dl dd {
+        float: left;
+      }
+      .box dl dt {
+        width: 100px;
+      }
+      .box dl dd {
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="">
+      <div class="box">
+        <dl>
+          <dt id="email">datetime</dt>
+          <dd><input type="datetime" for="email" /></dd>
+          <dd>* 注册后不可更改</dd>
+        </dl>
+        <dl>
+          <dt>data</dt>
+          <dd><input type="date" /></dd>
+          <dd>* 注册后不可更改</dd>
+        </dl>
+        <dl>
+          <dt>time</dt>
+          <dd><input type="time" /></dd>
+          <dd>* 注册后不可更改</dd>
+        </dl>
+        <dl>
+          <dt>month</dt>
+          <dd><input type="month" /></dd>
+          <dd>* 注册后不可更改</dd>
+        </dl>
+        <dl>
+          <dt>week</dt>
+          <dd><input type="week" /></dd>
+          <dd>* 注册后不可更改</dd>
+        </dl>
+        <dl>
+          <dt></dt>
+          <dd>
+            <input type="submit" value="提交" />
+            <input type="reset" value="重置" />
+          </dd>
+        </dl>
+      </div>
+    </form>
+  </body>
+</html>

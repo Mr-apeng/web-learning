@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="点我显示效果" class="btn" />
+    <div class="d1">
+      <p>天真以为是他的独特品味</p>
+      <p>天真以为是他的独特品味</p>
+      <p>天真以为是他的独特品味</p>
+      <p>天真以为是他的独特品味</p>
+    </div>
+    <div class="d2">
+      <p>天真以为是他的独特品味</p>
+      <p>天真以为是他的独特品味</p>
+      <p>天真以为是他的独特品味</p>
+      <p>天真以为是他的独特品味</p>
+    </div>
+
+    <script>
+      // let btn = document.getElementsByClassName('btn')[0]
+      let btn = document.querySelector('.btn')
+      btn.addEventListener('click', function() {
+        let para = document.querySelector('.d1').querySelectorAll('p')
+        // para是一个 Nodelist的类数组
+        for (let i = 0; i < para.length; i++) {
+          para[i].textContent = '殊不知是他难以言喻的对决'
+        }
+      })
+    </script>
+  </body>
+</html>

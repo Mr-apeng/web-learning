@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" value="真的吗" />
+    <input type="text" value="" />
+    <input type="text" value="" />
+    <input type="button" value="点我显示效果" class="btn" />
+    <input type="text" value="" />
+    <input type="text" value="" />
+    <input type="text" value="" />
+
+    <script>
+      let btn = document.querySelector('.btn')
+      btn.addEventListener('click', function() {
+        let inputs = document.querySelectorAll('input')
+        for (let i = 0; i < inputs.length; i++) {
+          if (inputs[i].type === 'text') {
+            inputs[i].value = '看我'
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

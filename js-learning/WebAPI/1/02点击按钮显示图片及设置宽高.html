@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="显示图片" id="btn" />
+    <script>
+      let btn = document.querySelector('#btn')
+      btn.addEventListener('click', function() {
+        let image = document.createElement('img')
+        image.src = '../images/liuyan.jpg'
+        // html里加
+        image.width = '200'
+        image.height = '300'
+        // image.width = '200px'
+        // image.height = '300px'
+        // css里面加
+        // image.style.width = '200px'
+        // image.style.height = '300px'
+        document.body.appendChild(image)
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="有种点我啊" id="me" />
+    <script>
+      function clickMe() {
+        alert('你有种别走，我摇人')
+      }
+      
+      // var btn = document.getElementById('me')
+      var btn = document.querySelector('#me')
+
+      btn.addEventListener('click', clickMe)
+    </script>
+  </body>
+</html>
