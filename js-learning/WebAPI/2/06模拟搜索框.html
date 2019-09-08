@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" value="请输入搜索内容" id="search" />
+
+    <script>
+      let search = document.getElementById('search')
+      const TXT = search.value
+      search.style.color = '#666'
+      // focus 获得焦点时触发
+      search.addEventListener('focus', function() {
+        if (this.value === TXT) {
+          this.value = ''
+          this.style.color = '#000'
+        }
+      })
+
+      // blur 失去焦点时触发
+      search.addEventListener('blur', function() {
+        // 判断number 的效率比判断string 的效率要高
+        // if (this.value === '')
+        if (this.value.length === 0) {
+          this.value = TXT
+          this.style.color = '#666'
+        }
+      })
+    </script>
+  </body>
+</html>

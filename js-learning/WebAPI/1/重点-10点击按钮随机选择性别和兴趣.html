@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="informal-package-function.js"></script>
+  </head>
+  <body>
+    <input type="button" value="随机修改性别" id="changeGender" />
+    <input type="radio" name="gender" id="male" class="gender" /><label
+      for="male"
+      >男</label
+    >
+    <input type="radio" name="gender" id="female" class="gender" /><label
+      for="female"
+      >女</label
+    >
+    <input type="radio" name="gender" id="unknown" class="gender" /><label
+      for="unknown"
+      >不祥</label
+    >
+    <br />
+    <input type="button" value="随机选择2个兴趣" id="changeInterest" />
+    <input type="checkbox" name="interest" id="eating" class="interest" /><label
+      for="eating"
+      >吃饭</label
+    >
+    <input
+      type="checkbox"
+      name="interest"
+      id="sleeping"
+      class="interest"
+    /><label for="sleeping">睡觉</label>
+    <input
+      type="checkbox"
+      name="interest"
+      id="swimming"
+      class="interest"
+    /><label for="swimming">游泳</label>
+    <input
+      type="checkbox"
+      name="interest"
+      id="basketball"
+      class="interest"
+    /><label for="basketball">篮球</label>
+    <input
+      type="checkbox"
+      name="interest"
+      id="guitar"
+      class="interest"
+    /><label for="guitar">吉他</label>
+
+    <script>
+      let genderBtn = document.querySelector('#changeGender')
+      let interestBtn = document.querySelector('#changeInterest')
+      let gender = document.querySelectorAll('.gender')
+      let interest = document.querySelectorAll('.interest')
+
+      genderBtn.addEventListener('click', function() {
+        // 取数组中随机1个值
+        gender[random_Number(0, gender.length - 1)].checked = 'checked'
+      })
+      interestBtn.addEventListener('click', function() {
+        // 取数组中随机2个值
+        let twoNumber = select_n_number_fromMinToMax(0, interest.length - 1, 2)
+
+        // 排他
+        interest.forEach(item => {
+          // 每一次遍历都把checked清掉
+          item.checked = false
+          for (let i = 0; i < 2; i++) {
+            interest[twoNumber[i]].checked = true
+          }
+          // interest[twoNumber[0]].checked = true
+          // interest[twoNumber[1]].checked = true
+        })
+      })
+    </script>
+  </body>
+</html>

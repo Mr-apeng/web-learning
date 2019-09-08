@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      .nodeSmall {
+        width: 50px;
+        height: 50px;
+        background: url(../images/bgs.png) no-repeat -159px -51px;
+        position: fixed;
+        right: 10px;
+        top: 40%;
+      }
+      .erweima {
+        position: absolute;
+        top: 0px;
+        left: -150px;
+      }
+      .nodeSmall a {
+        display: block;
+        width: 50px;
+        height: 50px;
+      }
+      .hide {
+        /* display: none; */
+        left: 99999999999px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="nodeSmall">
+      <a href="#"></a>
+      <div class="erweima hide" id="er">
+        <img src="../images/456.png" alt="" />
+      </div>
+    </div>
+
+    <script>
+      let aObj = document.querySelector('a')
+      // 显示二维码
+      aObj.addEventListener('mouseover', () => {
+        document.querySelector('.erweima').setAttribute('class', 'erweima')
+      })
+      // 隐藏二维码
+      aObj.addEventListener('mouseout', () => {
+        document.querySelector('.erweima').setAttribute('class', 'erweima hide')
+      })
+    </script>
+  </body>
+</html>

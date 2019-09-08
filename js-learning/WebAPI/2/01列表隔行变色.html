@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    /* ul li:nth-child(odd) {
+      background-color: hotpink;
+    }
+    ul li:nth-child(even) {
+      background-color: yellowgreen;
+    } */
+  </style>
+</head>
+<body>
+  <button>隔行变色</button>
+  <ul id="uu">
+    <li>红旗</li>
+    <li>五菱宏光</li>
+    <li>奔驰</li>
+    <li>哈弗</li>
+    <li>兰博基尼</li>
+    <li>凯迪拉克</li>
+    <li>奥迪</li>
+    <li>悍马</li>
+  </ul>
+
+  <script>
+    let btn = document.querySelector('button')
+    let li = document.querySelectorAll('li')
+    btn.addEventListener('click', function() {
+      li.forEach((item, index) => {
+        // console.log(index)
+        index % 2 == 0 ? item.style.backgroundColor = 'hotpink' : item.style.backgroundColor = 'yellowgreen'
+      })
+    })
+  </script>
+</body>
+</html>

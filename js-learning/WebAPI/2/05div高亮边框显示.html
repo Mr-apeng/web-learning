@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      div {
+        width: 200px;
+        height: 150px;
+        background-color: skyblue;
+        float: left;
+        margin-left: 10px;
+        box-sizing: border-box;
+        /* border: 2px solid skyblue; */
+        /* 小技巧，是把边框设置成同为2px的与背景色相同的，但宽高仍然变了 */
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <script>
+      // let dv1 = document.getElementsByTagName('div')
+      // 返回的是 HTMLCollection
+      // HTMLCollection 是一个节点对象的集合，只能包含元素节点(element)，不能包含其他类
+      // 型的节点。它的返回值是一个类似数组的对象，但是与NodeList接口不同，
+      // HTMLCollection 没有forEach方法，只能使用for循环遍历。
+
+      let dv2 = document.querySelectorAll('div')
+      //NodeList实例是一个类似数组的对象，它的成员是节点对象
+      //NodeList实例很像数组，可以使用length属性和forEach方法
+      dv2.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          this.style.border = '2px solid red'
+        })
+        item.addEventListener('mouseleave', function() {
+          this.style.border = ''
+        })
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="没怀孕" class="btn" />
+    <input type="button" value="没怀孕" class="btn" />
+    <input type="button" value="没怀孕" class="btn" />
+    <input type="button" value="没怀孕" class="btn" />
+    <input type="button" value="没怀孕" class="btn" />
+
+    <script>
+      let btns = document.querySelectorAll('.btn')
+      // 情形一：var i，全局变量 导致错误
+      // for (var i = 0; i < btns.length; i++) {
+      //   // 出错 i 一直等于 5
+      //   btns[i].addEventListener('click', function() {
+      //     btns.forEach(function(item, index, array) {
+      //       console.log(i)
+      //       // 出错 i 一直等于 5
+      //       // 其实就是return item === btns[5]
+      //       return item === btns[i]
+      //         ? (item.value = '怀孕了')
+      //         : (item.value = '没怀孕')
+      //     })
+      //   })
+      // }
+      // 更改，改成let，把i变成局部变量，每一次循环都是独立的i
+      // for (let i = 0; i < btns.length; i++) {
+      //   btns[i].addEventListener('click', function() {
+      //     btns.forEach(function(item, index, array) {
+      //       console.log(i)
+      //       return item === btns[i]
+      //         ? (item.value = '怀孕了')
+      //         : (item.value = '没怀孕')
+      //     })
+      //   })
+      // }
+
+      // 情形二：嵌套函数的this指向window 导致错误
+      // for (let i = 0; i < btns.length; i++) {
+      //   btns[i].addEventListener('click', function() {
+      //     btns.forEach(function(item, index, array) {
+      //       console.log(i)
+      //       console.log(this)
+      //       // this 指向 window，嵌套函数的this指向window
+      //       return item === this
+      //         ? (item.value = '怀孕了')
+      //         : (item.value = '没怀孕')
+      //     })
+      //   })
+      // }
+      // 更改，用event.target
+      // for (let i = 0; i < btns.length; i++) {
+      //   btns[i].addEventListener('click', function(event) {
+      //     btns.forEach(function(item, index, array) {
+      //       console.log(i)
+      //       console.log(this)
+      //       console.log(event.target)
+      //       // this 指向 window，嵌套函数的this指向window
+      //       return item === event.target
+      //         ? (item.value = '怀孕了')
+      //         : (item.value = '没怀孕')
+      //     })
+      //   })
+      // }
+      // 更改，内层函数用箭头函数
+      // for (let i = 0; i < btns.length; i++) {
+      //   console.log(`windowThis: ${this}`)
+      //   // 全局的this 指向window
+      //   btns[i].addEventListener('click', function() {
+      //     console.log(`ousideThis: ${this}`)
+      //     // this指向btns[i]
+      //     btns.forEach((item, index, array) => {
+      //       console.log(`i: ${i}`)
+      //       console.log(`insideThis: ${this}`)
+      //       // this 继承外层作用域的this,即btns[i]
+      //       return item === this
+      //         ? (item.value = '怀孕了')
+      //         : (item.value = '没怀孕')
+      //     })
+      //   })
+      // }
+
+      // 情形三，外层函数用了箭头函数，导致错误
+      // for (let i = 0; i < btns.length; i++) {
+      //   console.log(`windowThis: ${this}`)
+      //   // 全局作用域下的this 指向window
+      //   btns[i].addEventListener('click', () => {
+      //     console.log(`this: ${this}`) //this继承外层作用域的this，即window
+      //     btns.forEach((item, index, array) => {
+      //       console.log(i)
+      //       console.log(`this: ${this}`)
+      //       // this 继承外层作用域的this，即window
+      //       return item === this
+      //         ? (item.value = '怀孕了')
+      //         : (item.value = '没怀孕')
+      //     })
+      //   })
+      // }
+      // 更改，用event.target，不推荐。因为虽然没有用到this，但是this指向有问题
+      // for (let i = 0; i < btns.length; i++) {
+      //   console.log(`windowThis: ${this}`)
+      //   // 全局作用域下的this 指向window
+      //   btns[i].addEventListener('click', (event) => {
+      //     console.log(`outsideThis: ${this}`) //this继承外层作用域的this，即window
+      //     console.log(`event.target: ${event.target}`)
+      //     btns.forEach((item, index, array) => {
+      //       return item === event.target
+      //         ? (item.value = '怀孕了')
+      //         : (item.value = '没怀孕')
+      //     })
+      //   })
+      // }
+
+      // 推荐以下两种
+      // for (let i = 0; i < btns.length; i++) {
+      //   btns[i].addEventListener('click', function(event) {
+      //     btns.forEach(item => item === event.target ? item.value = '怀孕了' : item.value = '没怀孕')
+      //   })
+      // }
+      // for (let i = 0; i < btns.length; i++) {
+      //   btns[i].addEventListener('click', function() {
+      //     btns.forEach(item =>
+      //       item === this ? (item.value = '怀孕了') : (item.value = '没怀孕')
+      //     )
+      //   })
+      // }
+      btns.forEach(item => {
+        item.addEventListener('click', event => {
+          btns.forEach(item => {
+            item === event.target
+              ? (item.value = '怀孕了')
+              : (item.value = '没怀孕')
+          })
+        })
+      })
+    </script>
+  </body>
+</html>

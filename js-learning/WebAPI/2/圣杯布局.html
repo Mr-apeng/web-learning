@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      .abc {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        background-color: gray;
+      }
+
+      header,
+      footer {
+        flex: 1;
+        background-color: pink;
+      }
+
+      .abc-body {
+        display: flex;
+        flex: 1;
+      }
+
+      .abc-content {
+        flex: 1;
+        background-color: red;
+      }
+
+      .abc-nav,
+      .abc-ads {
+        /* 两个边栏的宽度设为12em */
+        flex: 0 0 12em;
+        background-color: skyblue;
+      }
+
+      .abc-nav {
+        /* 导航放到最左边 */
+        order: -1;
+      }
+    </style>
+  </head>
+  <body class="abc">
+    <header>dsadsa</header>
+    <div class="abc-body">
+      <main class="abc-content">dsadsa</main>
+      <nav class="abc-nav">dsadsa</nav>
+      <aside class="abc-ads">dsadsa</aside>
+    </div>
+    <footer>dsadsa</footer>
+  </body>
+</html>

@@ -3,7 +3,7 @@
  * @Description: 随便封装的函数 
  * @Date: 2019-08-28 17:17:24 
  * @Last Modified by: apeng
- * @Last Modified time: 2019-09-06 01:18:41
+ * @Last Modified time: 2019-09-06 10:00:12
  */
 
 // 返回随机整数
@@ -25,14 +25,16 @@ function random_exceptMax(min, max) {
 function select_n_number_fromMinToMax(min, max, n) {
   let numArray = [];
   // 返回一个随机数
-  function random_includeMax(min, max) {
+  function random_Number(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
   while(numArray.length < n) {
-    let num = random_exceptMax(min, max)
+    let num = random_Number(min, max)
     // 数组中有和num相同的，则跳出循环
     if (numArray.some(item => item === num)) {
+      // break 终止循环
+      // continue 跳出当前循环进入下一次循环
       continue;
     }
     numArray.push(num)

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <button>点菜</button>
+  <select name="menu" id="menu">
+    <option value="1">1a</option>
+    <option value="2">2b</option>
+    <option value="3" selected="selected">3c</option>
+    <option value="4">4d</option>
+    <option value="5">5e</option>
+  </select>
+
+  <textarea name="" id="tt" cols="30" rows="10" readonly="readonly">
+    红多你大家撒了就对而近期即日起我金融
+  </textarea>
+
+  <script>
+    function random_number(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+
+    let btn = document.querySelector('button')
+    let options = document.querySelectorAll('option')
+
+    btn.addEventListener('click', function() {
+      options[random_number(0, options.length - 1)].selected = true
+    })
+
+    let text = document.querySelector('textarea')
+    btn.addEventListener('click', function() {
+      // text.textContent = '天真以为是他的'
+      // text.value = '是他的独特品味'
+      text.innerText = '就开了分撒家乐福静安寺'
+    })
+  </script>
+</body>
+</html>

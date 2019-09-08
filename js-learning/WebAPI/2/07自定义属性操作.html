@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      li {
+        list-style: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li score="10">小明的英语成绩</li>
+      <li score="20">小红的英语成绩</li>
+      <li score="30">小兰的英语成绩</li>
+      <li score="40">小刚的英语成绩</li>
+      <li score="50">小樱的英语成绩</li>
+    </ul>
+
+    <script>
+      let li = document.querySelectorAll('li')
+      // li.forEach((item, index)=> {
+      //   item.addEventListener('click', function() {
+      //     item.setAttribute('scoreOfMath', `${(index + 1) * 10}`)
+      //     console.log(`${item.textContent}: ${this.getAttribute('score')}`)
+      //     console.log(`数学成绩: ${this.getAttribute('scoreOfMath')}`)
+      //   })
+      // })
+      li.forEach((item, index)=> {
+        item.addEventListener('click', function() {
+          item.setAttribute('scoreOfMath', `${(index + 1) * 10}`)
+          console.log(`${item.textContent}: ${this.getAttribute('score')}`)
+          console.log(`数学成绩: ${this.getAttribute('scoreOfMath')}`)
+          item.removeAttribute('score')
+          console.log(`${item.textContent}: ${this.getAttribute('score')}`)
+        })
+      })
+    </script>
+  </body>
+</html>
