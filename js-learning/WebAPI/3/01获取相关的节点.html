@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="dv">
+      <span>div中第一个元素，span标签</span>
+      <p>div中第二个元素，p标签</p>
+      <ul>我是元素开头text
+        <li>鸣人</li>
+        <li>佐助</li>
+        <li>小樱</li>
+        <li id="ningci">宁次</li>
+        <li>雏田</li>
+        <li>我爱罗</li>我是元素结尾text
+      </ul>
+    </div>
+  </body>
+  <!-- 
+  <script>
+    let ulObj = document.querySelector('ul')
+
+    // ulObj 的父节点
+    console.log(ulObj.parentNode)
+    // <div id="dv">...</div>
+
+    // ulObj 的父元素
+    console.log(ulObj.parentElement)
+    // <div id="dv">...</div>
+
+    console.log(ulObj.parentNode.nodeType) //1
+    console.log(ulObj.parentNode.nodeName) //DIV
+    console.log(ulObj.parentNode.nodeValue)  //null
+  </script>
+-->
+
+  <!-- 
+  <script>
+    let divObj = document.querySelector('#dv')
+    // 子节点
+    console.log(divObj.childNodes)
+    // NodeList(7) [text, span, text, p, text, ul, text]
+
+    // 子元素
+    console.log(divObj.children)
+    // HTMLCollection(3) [span, p, ul]
+  </script>
+-->
+
+  <script>
+    var ulObj = document.getElementById('ul');
+    // 父节点
+    // console.log(`父节点：${ulObj.parentNode}如下`);
+    console.log(ulObj.parentNode);
+    // 父元素
+    // console.log(`父元素：${ulObj.parentElement}如下`);
+    console.log(ulObj.parentElement);
+    // 子节点
+    // console.log(`子节点：${ulObj.childNodes}如下`);
+    console.log(ulObj.childNodes);
+    // 子元素
+    // console.log(`子元素：${ulObj.children}如下`);
+    console.log(ulObj.children);
+
+// -------------以上代码为chrome, firefox, ie通用
+// -------------------------------------------------------------------------
+// -------------以下代码chrome, firefox, ie9及以上通用, ie8及以下有出入
+// -------------ie8及以下不认识元素的代码，且把节点的代码当成元素的代码
+// -------------获取节点的，ie8得到的是元素；获取元素的，ie8得到的是undefined
+
+    // 第一个子节点
+    // console.log(`第一个子节点：${ulObj.firstChild}如下`);
+    console.log(ulObj.firstChild);
+    // 第一个子元素
+    // console.log(`第一个子元素：${ulObj.firstElementChild}如下`);
+    console.log(ulObj.firstElementChild);
+    // 最后一个子节点
+    // console.log(`最后一个子节点：${ulObj.lastChild}如下`);
+    console.log(ulObj.lastChild);
+    // 最后一个子元素
+    // console.log(`最后一个子元素：${ulObj.lastElementChild}如下`);
+    console.log(ulObj.lastElementChild);
+
+    var ningci = document.getElementById('ningci');
+    // 某个元素的前一个兄弟节点
+    // console.log(`宁次的前一个兄弟节点：${ningci.previousSibling}如下`);
+    console.log(ningci.previousSibling);
+    // 某个元素的前一个兄弟元素
+    // console.log(`宁次的前一个兄弟元素：${ningci.previousElementSibling}如下`);
+    console.log(ningci.previousElementSibling);
+    // 某个元素的后一个兄弟节点
+    // console.log(`宁次的后一个兄弟节点：${ningci.nextSibling}如下`);
+    console.log(ningci.nextSibling);
+    // 某个元素的后一个兄弟元素
+    // console.log(`宁次的后一个兄弟元素：${ningci.nextElementSibling}如下`);
+    console.log(ningci.nextElementSibling);
+  </script>
+</html>

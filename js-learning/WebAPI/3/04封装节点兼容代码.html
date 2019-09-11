@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="uu">
+      <li>li1</li>
+      <li>li2</li>
+      <li>li3</li>
+      <li>li4</li>
+    </ul>
+
+    <script>
+      // 封装获取子元素兼容代码
+      // element.firstChild ----> 谷歌和火狐获取的是第一个子节点
+      // element.firstChild ----> IE8获取的是第一个子元素
+      // element.firstElementChild ----> 谷歌和火狐获取的是第一个子元素
+      // element.firstElementChild ----> IE8获取的是undefined
+      function getFirstElementChild(el) {
+        if (el.firstElementChild) { //如果支持
+          return el.firstElementChild
+        } else {  //如果不支持
+          var node = el.firstChild
+          // 当节点存在并且节点不是element，就往下找nodeType === 1 的节点
+          while (node && node.nodeType !== 1) {
+            node = node.nextSibling
+          }
+          return node
+        }
+      }
+      console.log(getFirstElementChild(document.getElementById('uu')).innerText)
+    </script>
+  </body>
+</html>

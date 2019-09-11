@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 300px;
+        height: 450px;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="button" value="变色" id="btn" />
+    <ul id="uu">
+      <li>天真以为是他的独特品味</li>
+      <li>天真以为是他的独特品味</li>
+      <li>天真以为是他的独特品味</li>
+      <li>天真以为是他的独特品味</li>
+      <li>天真以为是他的独特品味</li>
+      <li>天真以为是他的独特品味</li>
+      <li>天真以为是他的独特品味</li>
+      <li>天真以为是他的独特品味</li>
+    </ul>
+
+    <script>
+      let nodes = document.getElementById('uu').childNodes
+      let count = 0
+
+      document.getElementById('btn').addEventListener('click', () => {
+        for (let i = 0; i < nodes.length; i++) {
+          if (nodes[i].nodeName === 'LI') {
+            nodes[i].style.backgroundColor =
+              count % 2 === 0 ? 'skyblue' : 'lightgrey'
+            count++
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

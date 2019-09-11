@@ -1,0 +1,181 @@
+<!-- 
+  1、click 通过一个标识 flag 去做两种状态的事件
+  2、[].push.apply(obj, Nodelist)
+  3、阻止事件冒泡
+ -->
+
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8" />
+    <title></title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      .wrap {
+        width: 300px;
+        margin: 100px auto 0;
+      }
+
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 1px solid #c0c0c0;
+        width: 300px;
+      }
+
+      th,
+      td {
+        border: 1px solid #d0d0d0;
+        color: #404060;
+        padding: 10px;
+      }
+
+      th {
+        background-color: #09c;
+        font: bold 16px '微软雅黑';
+        color: #fff;
+      }
+
+      td {
+        font: 14px '微软雅黑';
+      }
+
+      tbody tr {
+        background-color: #f0f0f0;
+      }
+
+      tbody tr:hover {
+        cursor: pointer;
+        background-color: #fafafa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <table>
+        <thead>
+          <tr>
+            <th id="th">
+              <input type="checkbox" />
+            </th>
+            <th>菜名</th>
+            <th>饭店</th>
+          </tr>
+        </thead>
+        <tbody id="tb">
+          <tr>
+            <td>
+              <input type="checkbox" />
+            </td>
+            <td>红烧肉</td>
+            <td>田老师</td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" />
+            </td>
+            <td>西红柿鸡蛋</td>
+            <td>田老师</td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" />
+            </td>
+            <td>油炸榴莲</td>
+            <td>田老师</td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" />
+            </td>
+            <td>清蒸助教</td>
+            <td>田老师</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      const TH = document.getElementById('th')
+      const ALLCHECK = TH.querySelector('input')
+
+      const TB = document.getElementById('tb')
+      let checkboxes = TB.querySelectorAll('input')
+      let trFromTB = TB.querySelectorAll('tr')
+
+      // ALLCHECK 选中，则全选；不选，则全不选
+      ALLCHECK.addEventListener('click', function() {
+        // console.log(ALLCHECK.checked)
+        checkboxes.forEach(item => (item.checked = this.checked))
+      })
+
+      // 1、通过 tr 勾选 checkbox
+      // 2、全部 checkbox 选中，则 ALLCHECK 勾选，否则 ALLCHECK 不勾选
+      trFromTB.forEach((item, index) => {
+        item.addEventListener('click', function(event) {
+          // this 指 item
+          // console.log(this)
+          // console.log(this === item)  //true
+          let checkedOrNot = this.querySelector('input').checked
+          let flag = checkedOrNot
+          switch (flag) {
+            case true:
+              console.log(flag)
+              // checkedOrNot = false  //这么写是错误的
+              this.querySelector('input').checked = false
+              flag = false
+              break
+            case false:
+              console.log(flag)
+              // checkedOrNot = true //这么写是错误的
+              this.querySelector('input').checked = true
+              flag = true
+              break
+            default:
+              break
+          }
+
+          // for (let i = 0; i < checkboxes.length; i++) {
+          //   if (!checkboxes[i].checked) {
+          //     console.log(checkboxes[i].checked + '1if')
+          //     ALLCHECK.checked = false
+          //     break
+          //   } else {
+          //     console.log(checkboxes[i].checked + '2if')
+          //     ALLCHECK.checked = true
+          //   }
+          // }
+
+          let arr = []
+          ;[].push.apply(arr, checkboxes)
+          let arrayOfCheckbox = arr
+          // 只要 item 中有一个 checked 为 false, 则返回 true, ALLCHECK 就为 false
+          ALLCHECK.checked = arrayOfCheckbox.some(item => !item.checked)
+            ? false
+            : true
+        })
+      })
+
+      // 以下设置 checkbox，并且停止向上冒泡到tr
+      checkboxes.forEach(item => {
+        item.addEventListener(
+          'click',
+          function(event) {
+            let arr = []
+            ;[].push.apply(arr, checkboxes)
+            let arrayOfCheckbox = arr
+            // 只要 item 中有一个 checked 为 false, 则返回 true, ALLCHECK 就为 false
+            ALLCHECK.checked = arrayOfCheckbox.some(item => !item.checked)
+              ? false
+              : true
+
+            // 阻止事件向上冒泡到 tr 节点，不会触发 tr 节点的监听函数
+            event.stopPropagation()
+          }, false)
+      })
+    </script>
+  </body>
+</html>
