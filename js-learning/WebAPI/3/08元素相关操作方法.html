@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      .dv {
+        width: 300px;
+        height: 200px;
+        border: 1px solid red;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="button" value="增加按钮" id="btn1" />
+    <input type="button" value="减少按钮" id="btn2" />
+    <input type="button" value="清空" id="btn3" />
+    <input type="button" value="就增加一个按钮" id="btn4" />
+    <div class="dv"></div>
+
+    <script>
+      const BTN1 = document.getElementById('btn1')
+      const BTN2 = document.getElementById('btn2')
+      const BTN3 = document.getElementById('btn3')
+      const BTN4 = document.getElementById('btn4')
+      const DIV = document.querySelector('.dv')
+      let count = 0
+
+      BTN1.addEventListener('click', function() {
+        count++
+        let btnObj = document.createElement('button')
+        btnObj.innerText = `按钮${count}`
+        // 顺序增加
+        // DIV.appendChild(btnObj)
+        // 倒序增加
+        DIV.insertBefore(btnObj, DIV.firstElementChild)
+      })
+
+      BTN2.addEventListener('click', function() {
+        DIV.removeChild(DIV.firstElementChild)
+        if (!DIV.firstElementChild) {
+          count = 0
+        }
+      })
+
+      BTN3.addEventListener('click', function() {
+        while(DIV.firstElementChild) {
+          DIV.removeChild(DIV.firstElementChild)
+        }
+        count = 0
+      })
+
+      BTN4.addEventListener('click', function() {
+        if(!DIV.firstElementChild) {
+          let btnObj = document.createElement('button')
+          btnObj.innerText = `按钮`
+          DIV.appendChild(btnObj)
+        }
+      })
+    </script>
+  </body>
+</html>

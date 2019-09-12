@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 200px;
+        height: 200px;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn">创建表格</button>
+    <div class="dv"></div>
+
+    <script>
+      const DATA = [
+        { name: '百度', href: 'http://www.baidu.com' },
+        { name: '谷歌', href: 'http://www.baidu.com' },
+        { name: '优酷', href: 'http://www.baidu.com' },
+        { name: '爱奇艺', href: 'http://www.baidu.com' },
+        { name: '思否', href: 'http://www.baidu.com' }
+      ]
+      let btn = document.querySelector('.btn')
+      let dv = document.querySelector('.dv')
+
+      btn.addEventListener('click', function() {
+        let tableObj = document.createElement('table')
+        dv.appendChild(tableObj)
+        tableObj.border = '1'
+        tableObj.cellSpacing = '0'
+        tableObj.cellPadding = '2px'
+        
+        for (let i = 0; i < DATA.length; i++) {
+          // 创建 trObj
+          let trObj = document.createElement('tr')
+          tableObj.appendChild(trObj)
+          tableObj.cellPadding = '0'
+          tableObj.cellSpacing = '0'
+
+          // 每个 trObj 有2个 td
+          let td1 = document.createElement('td')
+          td1.innerText = `${DATA[i].name}`
+          trObj.appendChild(td1)
+
+          let td2 = document.createElement('td')
+          td2.innerHTML = `<a href="${DATA[i].href}">${DATA[i].name}</a>`
+          trObj.appendChild(td2)
+
+        }
+      })
+    </script>
+  </body>
+</html>

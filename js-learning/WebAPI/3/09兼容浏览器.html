@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="../../informal-package-function.js"></script>
+</head>
+<body>
+  <input type="button" value="点我啊" id="btn">
+  <script>
+    var btn = document.getElementById('btn')
+    EventUtil.addHandler(btn, 'click', function() {
+      console.log('我被点了')
+    })
+  </script>
+</body>
+</html>
